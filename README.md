@@ -73,12 +73,12 @@ O escopo do sistema abrange:
 
 | Integrante | Foco Principal / Feature | GitHub |
 |------------|--------------------------|--------|
-| **Lucas Cavalheiro** | Full Stack (API & Integração) | [@Lucas](https://github.com/LucasCavalheiro21) |
-| **Isaias Silva** | Full Stack (API & Integração) | [@Isaias](https://github.com/isaias30silva) |
-| **Matheus Carvalho** | Full Stack (Interfaces & UX) | [@Matheus](https://github.com) |
-| **Pedro Fernandes** | Full Stack (Interfaces & UX) | [@Pedro](https://github.com) |
-| **Giselle Morais** | Full Stack (Modelagem de Dados) | [@Giselle](https://github.com/giswolfie) |
-| **Ana Beatriz Freitas** | Full Stack (Modelagem de Dados) | [@Ana](https://github.com) |
+| **Lucas Cavalheiro** | Full Stack | [@Lucas](https://github.com/LucasCavalheiro21) |
+| **Isaias Silva** | Full Stack | [@Isaias](https://github.com/isaias30silva) |
+| **Matheus Carvalho** | Full Stack | [@Matheus](https://github.com) |
+| **Pedro Fernandes** | Full Stack | [@Pedro](https://github.com/pedrofernandesx) |
+| **Giselle Morais** | Full Stack | [@Giselle](https://github.com/giswolfie) |
+| **Ana Beatriz Freitas** | Full Stack | [@Ana](https://github.com) |
 
 ---
 
