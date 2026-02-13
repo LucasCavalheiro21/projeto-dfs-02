@@ -75,7 +75,7 @@ O escopo do sistema abrange:
 |------------|--------------------------|--------|
 | **Lucas Cavalheiro** | Full Stack | [@Lucas](https://github.com/LucasCavalheiro21) |
 | **Isaias Silva** | Full Stack | [@Isaias](https://github.com/isaias30silva) |
-| **Matheus Carvalho** | Full Stack | [@Matheus](https://github.com) |
+| **Matheus Carvalho** | Full Stack | [@Matheus](https://github.com/mc4rvalho) |
 | **Pedro Fernandes** | Full Stack | [@Pedro](https://github.com/pedrofernandesx) |
 | **Giselle Morais** | Full Stack | [@Giselle](https://github.com/giswolfie) |
 | **Ana Beatriz Freitas** | Full Stack | [@Ana](https://github.com) |
