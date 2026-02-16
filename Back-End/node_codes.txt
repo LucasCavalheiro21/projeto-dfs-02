@@ -1,14 +1,11 @@
-npm install express
-npm install nodemon -D
-npm install pg
-npm install prisma @prisma/cliente
-npm install @prisma/adapter-pg
-npm install --save-dev prisma dotenv
-npm init
-npx prisma init
+1. Abra o projeto na sua máquina
 
-pegar código do prisma postgres
+2. entre na pasta Back-End
 
-npx prisma migrate dev --name initial
-npx prisma generate
-npx prisma studio
+3. rode "npm install" no terminal para instalar as dependencias
+
+4. crie o arquivo .env com a senha do banco de dados (DATABASE_URL="postgresql://postgres:senha@localhost:porta/nome_do_banco")
+
+5. rode "npx prisma migrate dev" no terminal para copiar o banco pronto que está no schema.prima para o banco da sua máquina
+
+6. rode "npm start" no terminal para inicar o projeto
