@@ -1,0 +1,14 @@
+npm install express
+npm install nodemon -D
+npm install pg
+npm install prisma @prisma/cliente
+npm install @prisma/adapter-pg
+npm install --save-dev prisma dotenv
+npm init
+npx prisma init
+
+pegar código do prisma postgres
+
+npx prisma migrate dev --name initial
+npx prisma generate
+npx prisma studio
