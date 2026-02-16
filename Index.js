@@ -8,13 +8,13 @@ app.get("/pessoas", async (request, response) => {
     
     try{
 
-        const Pessoas = await prisma.Pessoas.findMany({
+        const pessoas = await prisma.pessoas.findMany({
            
-            orderBy: {name: "asc"}
+            //orderBy: {nome: "asc"}
 
         });
 
-        return response.status(200).json(Pessoas);
+        return response.status(200).json(pessoas);
 
     }catch(error){
 
@@ -34,15 +34,15 @@ app.get("/pessoas-posts", async (request, response) => {
 
     try{
     
-        const Pessoas = await prisma.Pessoas.findMany({skip, take});
-        const total = await prisma.Pessoas.count();
+        const pessoas = await prisma.pessoas.findMany({skip, take});
+        const total = await prisma.pessoas.count();
 
         return response.json({
 
         total,
         page: Number(page),
         totalPages: Math.ceil(total / take),
-        data: Pessoas
+        data: pessoas
 
     })
 
@@ -56,16 +56,16 @@ app.get("/pessoas-posts", async (request, response) => {
 
 app.post("/pessoas", async (request, response) => {
 
-    const {name, email, telefone, descricao} = request.body;
+    const {nome, email, telefone, descricao} = request.body;
     
     try{
 
-            const Pessoas = await prisma.Pessoas.create({
-            data: {name, email, telefone, descricao}
+            const pessoas = await prisma.pessoas.create({
+            data: {nome, email, telefone, descricao}
 
         })
 
-        return response.status(201).json(Pessoas);
+        return response.status(201).json(pessoas);
 
     }catch(error){
 
@@ -77,27 +77,27 @@ app.post("/pessoas", async (request, response) => {
 
 app.put("/pessoas/:id", async (request, response) => {
 
-    const {name, email, telefone, descricao} = request.body;
+    const {nome, email, telefone, descricao} = request.body;
     const {id} = request.params;
 
     try{
 
-        const Pessoas = await prisma.Pessoas.findUnique({where: {id}});
+        const pessoas = await prisma.pessoas.findUnique({where: {id}});
 
-        if(!Pessoas){
+        if(!pessoas){
 
             return response.status(404).json("User not found :(");
 
         }
 
-        const PessoasUpdated = await prisma.Pessoas.update({
+        const pessoasUpdated = await prisma.pessoas.update({
 
-            data: {name, email, telefone, descricao},
+            data: {nome, email, telefone, descricao},
             where: {id}
 
         })
 
-        return response.status(200).json(PessoasUpdated);
+        return response.status(200).json(pessoasUpdated);
 
     }catch(error){
 
@@ -113,15 +113,15 @@ app.delete("/pessoas/:id", async (request, response) => {
    
     try{
 
-        const Pessoas = await prisma.Pessoas.findUnique({where: {id}});
+        const pessoas = await prisma.pessoas.findUnique({where: {id}});
 
-        if(!Pessoas){
+        if(!pessoas){
 
-            return response.status(404).json("Pessoas not found");
+            return response.status(404).json("pessoas not found");
 
         }
 
-        await prisma.Pessoas.delete({
+        await prisma.pessoas.delete({
 
             where: {id}
 
