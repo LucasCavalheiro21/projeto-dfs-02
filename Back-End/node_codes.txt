@@ -4,7 +4,7 @@
 
 3. rode "npm install" no terminal para instalar as dependencias
 
-4. crie o arquivo .env com a senha do banco de dados (DATABASE_URL="postgresql://postgres:senha@localhost:porta/nome_do_banco")
+4. crie o arquivo .env com a senha do seu banco de dados (DATABASE_URL="postgresql://postgres:senha@localhost:porta/nome_do_banco")
 
 5. rode "npx prisma migrate dev" no terminal para copiar o banco pronto que está no schema.prima para o banco da sua máquina
 
