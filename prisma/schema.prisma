@@ -5,3 +5,31 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Pessoas {
+  
+  id           Int            @id @default(autoincrement())
+  nome         String         @db.VarChar(255)
+  email        String         @unique @db.VarChar(255)
+  telefone     String         @db.VarChar(50)
+  descricao    String?        @db.Text
+  criado_em    DateTime       @default(now()) @db.Timestamp
+  conhecimentos Conhecimentos[]
+
+  @@map("pessoas")
+
+}
+
+model Conhecimentos {
+
+  id         Int     @id @default(autoincrement())
+  titulo     String  @db.VarChar(255)
+  descricao  String  @db.Text
+  categoria  String  @db.VarChar(100)
+  nivel      String  @db.VarChar(50)
+  pessoa_id  Int
+  pessoa     Pessoas @relation(fields: [pessoa_id], references: [id], onDelete: Cascade)
+
+  @@map("conhecimentos")
+
+}
