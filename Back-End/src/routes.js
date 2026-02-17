@@ -16,14 +16,12 @@ import {
 
 const routes = Router();
 
-
 // pessoas
 
 routes.get("/pessoas", listarPessoas);
 routes.post("/pessoas", criarPessoa);
 routes.put("/pessoas/:id", atualizarPessoa);
 routes.delete("/pessoas/:id", deletarPessoa);
-
 
 // conhecimentos
 

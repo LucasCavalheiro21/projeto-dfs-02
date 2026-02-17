@@ -8,4 +8,6 @@
 
 5. rode "npx prisma migrate dev" no terminal para copiar o banco pronto que está no schema.prima para o banco da sua máquina
 
+6. rode "npx prisma generate" no terminal para ler o banco de dados do schema
+
 6. rode "npm start" no terminal para inicar o projeto

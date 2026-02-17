@@ -22,7 +22,6 @@ return response.status(500).send();
 
 };
 
-
 // POST pessoas
 
 export const criarPessoa = async (request, response) => {
@@ -46,7 +45,6 @@ return response.status(500).send();
 }
 
 };
-
 
 // PUT pessoas
 
@@ -81,7 +79,6 @@ return response.status(500).send();
 }
 
 };
-
 
 // DELETE pessoas
 

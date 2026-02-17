@@ -1,6 +1,5 @@
 import prisma from "../PrismaClient.js";
 
-
 // GET conhecimentos
 
 export const listarConhecimentos = async (request, response) => {
@@ -22,7 +21,6 @@ return response.status(500).send();
 }
 
 };
-
 
 // POST conhecimentos
 
@@ -47,7 +45,6 @@ return response.status(500).send();
 }
 
 };
-
 
 // PUT conhecimentos
 
@@ -82,7 +79,6 @@ return response.status(500).send();
 }
 
 };
-
 
 // DELETE conhecimentos
 
