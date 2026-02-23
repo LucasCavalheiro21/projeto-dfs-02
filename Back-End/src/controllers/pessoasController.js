@@ -4,23 +4,41 @@ import prisma from "../PrismaClient.js";
 
 export const listarPessoas = async (request, response) => {
 
-try{
+    try{
 
-const pessoas = await prisma.pessoas.findMany({
+        const { nome, descricao } = request.query;
+        const pessoas = await prisma.pessoas.findMany({
 
-    //orderBy: {nome: "asc"}
+        // adicionando filtros
 
-});
+        include: { conhecimentos: true },
+        orderBy: { criado_em: "asc" },
+        where: {
+            ...(nome && {
+            nome: {
+                contains: nome,
+                mode: "insensitive"
+            }
+            }),
+            ...(descricao && {
+            descricao: {
+                contains: descricao,
+                mode: "insensitive"
+            }
+            })
+        },
 
-return response.status(200).json(pessoas);
+        });
 
-}catch(error){
+        return response.status(200).json(pessoas);
 
-return response.status(500).send();
+    }catch(error){
 
+        return response.status(500).json({ error: "Erro ao listar pessoas.", detail: error.message });
+    
+    }
+    
 }
-
-};
 
 // POST pessoas
 

@@ -4,23 +4,56 @@ import prisma from "../PrismaClient.js";
 
 export const listarConhecimentos = async (request, response) => {
 
-try{
+    try {
 
-const conhecimentos = await prisma.conhecimentos.findMany({
+        const { titulo, descricao, categoria, nivel } = request.query;
+        const conhecimentos = await prisma.conhecimentos.findMany({
 
-    include: {pessoa: true}
+        // adicionando filtros
 
-});
+        include: { pessoa: true },
+        orderBy: { titulo: "asc" },
+        where: {
+            ...(titulo && {
+            titulo: {
+                contains: titulo,
+                mode: "insensitive"
+            }
+            }),
 
-return response.status(200).json(conhecimentos);
+            ...(descricao && {
+            descricao: {
+                contains: descricao,
+                mode: "insensitive"
+            }
+            }),
 
-}catch(error){
+            ...(categoria && {
+            categoria: {
+                contains: categoria,
+                mode: "insensitive"
+            }
+            }),
 
-return response.status(500).send();
+            ...(nivel && {
+            nivel: {
+                contains: nivel,
+                mode: "insensitive"
+            }
+            })
+        },
+
+        });
+
+        return response.status(200).json(conhecimentos);
+
+    }catch(error){
+
+        return response.status(500).json({ error: "Erro ao listar conhecimentos.", detail: error.message });
+    
+    }
 
 }
-
-};
 
 // POST conhecimentos
 
