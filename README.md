@@ -168,6 +168,53 @@ Principais rotas disponíveis para teste:
 | GET | `/conhecimentos` | Lista os conhecimentos disponíveis |
 | POST | `/conhecimentos` | Cria uma nova oferta |
 
+Facilitando a busca com filtros (busca parcial):
+
+| Filtro | Rota | Descrição |
+|---|---|---|
+| Nome | `/pessoas?nome=carlos` | Buscar por nome |
+| Descrição | `/pessoas?descricao=matematica` | Buscar por palavras-chave |
+| Combinando filtros | `/pessoas?nome=luc&descricao=professor` | Buscas específicas |
+| Título | `/conhecimentos?titulo=javascript` | Buscar por título |
+| Descrição | `/conhecimentos?descricao=programação` | Buscar por palavras-chave |
+| Categoria | `/conhecimentos?categoria=educa` | Buscar por categorias |
+| Nível | `/conhecimentos?nivel=intermed` | Buscar por níveis |
+| Combinando filtros | `/conhecimentos?titulo=mat&categoria=educação` | Buscas específicas |
+
+---
+
+## 🔮 Próximos Passos
+
+### 🔎 Implementação de Filtros Avançados (Back-End)
+
+- Adição de filtros dinâmicos nos endpoints `GET /pessoas` e `GET /conhecimentos`;
+- Implementação de busca parcial (case-insensitive);
+- Possibilidade de combinação de múltiplos parâmetros via query string;
+- Estruturação das consultas utilizando Prisma ORM;
+- Otimização das consultas para melhor desempenho e escalabilidade.
+
+### 🔐 Autenticação e Autorização (Back-End)
+
+- Implementação de autenticação baseada em **JWT (JSON Web Token)**;
+- Criptografia de senhas utilizando **bcrypt**;
+- Criação de rota de login com validação de credenciais;
+- Implementação de middleware para proteção de rotas privadas;
+- Controle de autorização garantindo que usuários possam editar ou excluir apenas suas próprias ofertas;
+- Estruturação de controle de acesso baseado em identidade do usuário autenticado.
+
+### 🎨 Desenvolvimento do Front-End
+
+O frontend será desenvolvido com **ReactJS**, fornecendo uma interface simples, responsiva e intuitiva, integrada à API REST do backend.
+
+#### Funcionalidades previstas:
+
+- Exibir a lista de conhecimentos disponíveis;
+- Implementar formulários para cadastro de pessoas e ofertas;
+- Permitir edição e remoção das ofertas;
+- Desenvolver uma **landing page** apresentando a proposta da plataforma;
+- Implementar autenticação no cliente (login e controle de sessão);
+- Realizar integração completa com a API via requisições HTTP.
+
 ---
 
 ## © Direitos Autorais
