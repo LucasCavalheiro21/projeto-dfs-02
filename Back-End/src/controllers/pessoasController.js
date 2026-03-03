@@ -1,4 +1,5 @@
 import prisma from "../database/PrismaClient.js";
+import bcrypt from 'bcryptjs';
 
 export class PessoasController{
 
@@ -8,24 +9,22 @@ export class PessoasController{
         try{
             const { nome, descricao } = request.query;
             const pessoas = await prisma.pessoas.findMany({
-
-            // adicionando filtros
-
-            orderBy: { criado_em: "asc" },
-            where: {
-                ...(nome && {
-                nome: {
-                    contains: nome,
-                    mode: "insensitive"
-                }
-                }),
-                ...(descricao && {
-                descricao: {
-                    contains: descricao,
-                    mode: "insensitive"
-                }
-                })
-            },
+                select: { id: true, nome: true, email: true, isAdmin: true, telefone: true, descricao: true},
+                orderBy: { criado_em: "asc" },
+                where: {
+                    ...(nome && {
+                    nome: {
+                        contains: nome,
+                        mode: "insensitive"
+                    }
+                    }),
+                    ...(descricao && {
+                    descricao: {
+                        contains: descricao,
+                        mode: "insensitive"
+                    }
+                    })
+                },
             });
             return response.status(200).json(pessoas);
         }catch(error){
@@ -37,14 +36,16 @@ export class PessoasController{
     // POST pessoas
 
     async criarPessoas(request, response){
-        const {nome, email, telefone, descricao} = request.body;
+        const {nome, email, password, isAdmin, telefone, descricao} = request.body;
         try{
+            const passHash = bcrypt.hashSync(password, 10);
             const pessoas = await prisma.pessoas.create({
-                data: {nome, email, telefone, descricao}
+                data: {nome, email, password: passHash, isAdmin, telefone, descricao},
+                select: { id: true, nome: true, email: true, isAdmin: true, telefone: true, descricao: true, criado_em: true}
             });
             return response.status(201).json(pessoas);
         }catch(error){
-            return response.status(500).send();
+            return response.status(500).json({ error: "Erro ao criar pessoa.", detail: error.message });
         }
     };
 

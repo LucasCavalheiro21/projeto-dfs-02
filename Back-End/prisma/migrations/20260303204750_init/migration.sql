@@ -1,8 +1,10 @@
 -- CreateTable
 CREATE TABLE "pessoas" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "nome" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
+    "password" VARCHAR(255) NOT NULL,
+    "isAdmin" BOOLEAN NOT NULL DEFAULT false,
     "telefone" VARCHAR(50) NOT NULL,
     "descricao" TEXT,
     "criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -12,12 +14,12 @@ CREATE TABLE "pessoas" (
 
 -- CreateTable
 CREATE TABLE "conhecimentos" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "titulo" VARCHAR(255) NOT NULL,
     "descricao" TEXT NOT NULL,
     "categoria" VARCHAR(100) NOT NULL,
     "nivel" VARCHAR(50) NOT NULL,
-    "pessoa_id" INTEGER NOT NULL,
+    "pessoa_id" TEXT NOT NULL,
 
     CONSTRAINT "conhecimentos_pkey" PRIMARY KEY ("id")
 );
