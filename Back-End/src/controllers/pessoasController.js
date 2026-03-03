@@ -1,131 +1,89 @@
-import prisma from "../PrismaClient.js";
+import prisma from "../database/PrismaClient.js";
+
+export class PessoasController{
 
 // GET pessoas
 
-export const listarPessoas = async (request, response) => {
+    async listarPessoas(request, response){
+        try{
+            const { nome, descricao } = request.query;
+            const pessoas = await prisma.pessoas.findMany({
 
-    try{
+            // adicionando filtros
 
-        const { nome, descricao } = request.query;
-        const pessoas = await prisma.pessoas.findMany({
+            orderBy: { criado_em: "asc" },
+            where: {
+                ...(nome && {
+                nome: {
+                    contains: nome,
+                    mode: "insensitive"
+                }
+                }),
+                ...(descricao && {
+                descricao: {
+                    contains: descricao,
+                    mode: "insensitive"
+                }
+                })
+            },
+            });
+            return response.status(200).json(pessoas);
+        }catch(error){
+            return response.status(500).json({ error: "Erro ao listar pessoas.", detail: error.message });
 
-        // adicionando filtros
-
-        include: { conhecimentos: true },
-        orderBy: { criado_em: "asc" },
-        where: {
-            ...(nome && {
-            nome: {
-                contains: nome,
-                mode: "insensitive"
-            }
-            }),
-            ...(descricao && {
-            descricao: {
-                contains: descricao,
-                mode: "insensitive"
-            }
-            })
-        },
-
-        });
-
-        return response.status(200).json(pessoas);
-
-    }catch(error){
-
-        return response.status(500).json({ error: "Erro ao listar pessoas.", detail: error.message });
-    
+        }
     }
-    
-}
 
-// POST pessoas
+    // POST pessoas
 
-export const criarPessoa = async (request, response) => {
+    async criarPessoas(request, response){
+        const {nome, email, telefone, descricao} = request.body;
+        try{
+            const pessoas = await prisma.pessoas.create({
+                data: {nome, email, telefone, descricao}
+            });
+            return response.status(201).json(pessoas);
+        }catch(error){
+            return response.status(500).send();
+        }
+    };
 
-const {nome, email, telefone, descricao} = request.body;
+    // PUT pessoas
 
-try{
+    async atualizarPessoas(request, response){
+        const {nome, email, telefone, descricao} = request.body;
+        const {id} = request.params;
+        try{
+            const pessoas = await prisma.pessoas.findUnique({where: {id}});
+            if(!pessoas){
+                return response.status(404).json("Pessoa não encontrada :(");
+            }
+            const pessoasUpdated = await prisma.pessoas.update({
+                data: {nome, email, telefone, descricao},
+                where: {id}
+            });
+            return response.status(200).json(pessoasUpdated);
+        }catch(error){
+            return response.status(500).send();
+        }
+    };
 
-const pessoas = await prisma.pessoas.create({
+    // DELETE pessoas
 
-    data: {nome, email, telefone, descricao}
-
-});
-
-return response.status(201).json(pessoas);
-
-}catch(error){
-
-return response.status(500).send();
-
-}
-
-};
-
-// PUT pessoas
-
-export const atualizarPessoa = async (request, response) => {
-
-const {nome, email, telefone, descricao} = request.body;
-const {id} = request.params;
-
-try{
-
-const pessoas = await prisma.pessoas.findUnique({where: {id}});
-
-if(!pessoas){
-
-    return response.status(404).json("Pessoa não encontrada :(");
-
-}
-
-const pessoasUpdated = await prisma.pessoas.update({
-
-    data: {nome, email, telefone, descricao},
-    where: {id}
-
-});
-
-return response.status(200).json(pessoasUpdated);
-
-}catch(error){
-
-return response.status(500).send();
+    async deletarPessoas(request, response){
+        const {id} = request.params;
+        try{
+            const pessoas = await prisma.pessoas.findUnique({where: {id}});
+            if(!pessoas){
+                return response.status(404).json("Pessoa não encontrada :(");
+            }
+            await prisma.pessoas.delete({
+                where: {id}
+            });
+            return response.status(204).send();
+        }catch(error){
+            return response.status(500).send();
+        }
+    };
 
 }
-
-};
-
-// DELETE pessoas
-
-export const deletarPessoa = async (request, response) => {
-
-const {id} = request.params;
-
-try{
-
-const pessoas = await prisma.pessoas.findUnique({where: {id}});
-
-if(!pessoas){
-
-    return response.status(404).json("Pessoa não encontrada :(");
-
-}
-
-await prisma.pessoas.delete({
-
-    where: {id}
-
-});
-
-return response.status(204).send();
-
-}catch(error){
-
-return response.status(500).send();
-
-}
-
-};
